@@ -1,9 +1,10 @@
 import io.restassured.RestAssured;
-import io.restassured.http.Header;
-import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class testSuite {
 
@@ -53,7 +54,7 @@ public class testSuite {
                     .andReturn();
 
             responseStatus = response.getStatusCode();
-            if(responseStatus != 200) {
+            if (responseStatus != 200) {
                 location = response.getHeader("location");
                 System.out.println("Redirected to: " + location);
                 redirectCount++;
@@ -62,4 +63,35 @@ public class testSuite {
         System.out.println("Redirect count = " + redirectCount);
     }
 
+    @Test
+    public void getLongtimeJobTest() {
+
+        JsonPath response1 = RestAssured
+                .given()
+                .get("https://playground.learnqa.ru/ajax/api/longtime_job")
+                .jsonPath();
+        String token = response1.get("token");
+        Integer seconds = response1.get("seconds");
+
+        JsonPath response2 = RestAssured
+                .given()
+                .queryParam("token", token)
+                .get("https://playground.learnqa.ru/ajax/api/longtime_job")
+                .jsonPath();
+        assertEquals("Job is NOT ready", response2.get("status"));
+
+        try {
+            Thread.sleep(seconds * 1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JsonPath response3 = RestAssured
+                .given()
+                .queryParam("token", token)
+                .get("https://playground.learnqa.ru/ajax/api/longtime_job")
+                .jsonPath();
+        assertEquals("Job is ready", response3.get("status"));
+        assertNotEquals((String) null, response3.get("result"));
+
+    }
 }
