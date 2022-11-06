@@ -1,6 +1,9 @@
+package tests;
+
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import lib.BaseTestCase;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -12,7 +15,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class testSuite {
+public class HomeworkTests extends BaseTestCase {
 
     @Test
     public void getTextTest() {
