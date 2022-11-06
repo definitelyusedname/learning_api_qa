@@ -5,6 +5,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lib.BaseTestCase;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HomeworkTests extends BaseTestCase {
 
@@ -159,5 +160,14 @@ public class HomeworkTests extends BaseTestCase {
                 break;
             }
         }
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"this is a long string", "this is short", "this is 15 char"})
+    public void checkStringLengthTest(String check) {
+        if (check.isEmpty())
+            System.out.println("Input string is empty");
+        else
+            assertTrue(check.length() > 15, "Input string is less than 15 characters");
     }
 }
