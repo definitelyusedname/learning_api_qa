@@ -178,6 +178,16 @@ public class HomeworkTests extends BaseTestCase {
                 .andReturn();
 
         String cookie = getCookie(response, "HomeWork");
-        assertEquals("hw_value", cookie);
+        assertEquals("hw_value", cookie, "Unexpected value in cookie");
+    }
+
+    @Test
+    public void homeworkHeaderTest() {
+        Response response = RestAssured
+                .get("https://playground.learnqa.ru/api/homework_header")
+                .andReturn();
+
+        String header = getHeader(response, "x-secret-homework-header");
+        assertEquals("Some secret value", header, "Header value is different");
     }
 }
