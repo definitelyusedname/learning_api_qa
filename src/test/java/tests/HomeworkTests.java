@@ -170,4 +170,14 @@ public class HomeworkTests extends BaseTestCase {
         else
             assertTrue(check.length() > 15, "Input string is less than 15 characters");
     }
+
+    @Test
+    public void homeworkCookieTest() {
+        Response response = RestAssured
+                .get("https://playground.learnqa.ru/api/homework_cookie")
+                .andReturn();
+
+        String cookie = getCookie(response, "HomeWork");
+        assertEquals("hw_value", cookie);
+    }
 }
