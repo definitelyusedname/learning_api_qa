@@ -12,4 +12,11 @@ public class Assertions {
         int value = response.jsonPath().getInt(name);
         assertEquals(expectedValue, value, "Value in JSON is different from expected");
     }
+
+    public static void assertStringInJsonByName(Response response, String name, String expectedValue) {
+        response.then().assertThat().body("$", hasKey(name));
+
+        String value = response.jsonPath().getString(name);
+        assertEquals(expectedValue, value, "Value in JSON is different from expected");
+    }
 }
