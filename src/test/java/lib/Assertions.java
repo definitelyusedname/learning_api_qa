@@ -17,6 +17,6 @@ public class Assertions {
         response.then().assertThat().body("$", hasKey(name));
 
         String value = response.jsonPath().getString(name);
-        assertEquals(expectedValue, value, "Value in JSON is different from expected");
+        assertEquals(expectedValue, value, "Value of '"+ name +"' in JSON is different from expected");
     }
 }
