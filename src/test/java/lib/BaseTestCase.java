@@ -23,7 +23,7 @@ public class BaseTestCase {
         return cookies.get(name);
     }
 
-    protected int getIntFromJson(Response response, String name){
+    protected int getIntFromJson(Response response,  String name){
         response.then().assertThat().body("$", hasKey(name));
         return response.jsonPath().getInt(name);
     }
