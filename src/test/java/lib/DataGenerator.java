@@ -19,7 +19,6 @@ public class DataGenerator {
         userData.put("username", "learnqa");
         userData.put("firstName", "learnqa");
         userData.put("lastName", "learnqa");
-
         return userData;
     }
 
