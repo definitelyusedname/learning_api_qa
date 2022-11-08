@@ -35,6 +35,12 @@ public class Assertions {
         response.then().assertThat().body("$", not(hasKey(unexpectedField)));
     }
 
+    public static void assertJsonHasNotFields(Response response, String[] unexpectedFields) {
+        for (String unexpectedField:
+                unexpectedFields) {
+            assertJsonHasNotField(response, unexpectedField);
+        }
+    }
 
 
     public static void assertResponseTextEquals(Response response, String expectedResponseText) {
