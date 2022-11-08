@@ -115,7 +115,6 @@ public class UserEditTest extends BaseTestCase {
                 "https://playground.learnqa.ru/api/user/2",
                 header,
                 cookie);
-        responseGetDataOfDifferentUser.print();
         Assertions.assertStringInJsonByName(responseGetDataOfDifferentUser,"username", "Vitaliy");
     }
 
