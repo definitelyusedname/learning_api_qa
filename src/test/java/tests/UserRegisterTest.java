@@ -31,7 +31,7 @@ public class UserRegisterTest extends BaseTestCase {
                 .post("https://playground.learnqa.ru/api/user/")
                 .andReturn();
 
-        Assertions.assertResponseCodeEquals(response, 400);
+        Assertions.assertResponseStatusCodeEquals(response, 400);
         Assertions.assertResponseTextEquals(response, "Users with email '" + email + "' already exists");
         System.out.println(response.statusCode());
     }
@@ -46,7 +46,7 @@ public class UserRegisterTest extends BaseTestCase {
                 .post("https://playground.learnqa.ru/api/user/")
                 .andReturn();
 
-        Assertions.assertResponseCodeEquals(response, 200);
+        Assertions.assertResponseStatusCodeEquals(response, 200);
         Assertions.assertJsonHasField(response, "id");
     }
 
@@ -59,7 +59,7 @@ public class UserRegisterTest extends BaseTestCase {
         Response response = apiCoreRequests.makePostRequest(
                 "https://playground.learnqa.ru/api/user/",
                 userData);
-        Assertions.assertResponseCodeEquals(response, 400);
+        Assertions.assertResponseStatusCodeEquals(response, 400);
         Assertions.assertResponseTextEquals(response, "Invalid email format");
     }
 
@@ -73,7 +73,7 @@ public class UserRegisterTest extends BaseTestCase {
         Response response = apiCoreRequests.makePostRequest(
                 "https://playground.learnqa.ru/api/user/",
                 userData);
-        Assertions.assertResponseCodeEquals(response, 400);
+        Assertions.assertResponseStatusCodeEquals(response, 400);
         Assertions.assertResponseTextEquals(response, "The following required params are missed: "+missingFieldName+"");
     }
 
@@ -86,7 +86,7 @@ public class UserRegisterTest extends BaseTestCase {
         Response response = apiCoreRequests.makePostRequest(
                 "https://playground.learnqa.ru/api/user/",
                 userData);
-        Assertions.assertResponseCodeEquals(response, 400);
+        Assertions.assertResponseStatusCodeEquals(response, 400);
         Assertions.assertResponseTextEquals(response, "The value of 'username' field is too short");
     }
 
@@ -100,7 +100,7 @@ public class UserRegisterTest extends BaseTestCase {
         Response response = apiCoreRequests.makePostRequest(
                 "https://playground.learnqa.ru/api/user/",
                 userData);
-        Assertions.assertResponseCodeEquals(response, 400);
+        Assertions.assertResponseStatusCodeEquals(response, 400);
         Assertions.assertResponseTextEquals(response, "The value of 'username' field is too long");
     }
 }

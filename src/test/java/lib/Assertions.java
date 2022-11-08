@@ -50,7 +50,8 @@ public class Assertions {
                 "Response text is different from expected"
         );
     }
-    public static void assertResponseCodeEquals(Response response, int expectedStatusCode) {
+
+    public static void assertResponseStatusCodeEquals(Response response, int expectedStatusCode) {
         assertEquals(
                 expectedStatusCode,
                 response.statusCode(),
